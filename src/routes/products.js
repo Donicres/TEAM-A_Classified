@@ -8,6 +8,7 @@ router.post('/create ', (req, res) => {
     
 });
 
+
 router.get('/product/:productID ', (req, res) => {
   
 });
