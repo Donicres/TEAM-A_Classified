@@ -40,7 +40,7 @@ router.post('/create', async(request, respond) => {
     router.get('/search', async(request,response)=>{
         try{
           const query = request.query.q
-          const myquery = "SELECT * FROM Products"
+          const myquery = "SELECT * FROM Products where id like ?"
           const result = await queryPromise(myquery,query)
           if(result.lenght === 0){
             response.json({Message:'No data was found'})
