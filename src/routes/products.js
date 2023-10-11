@@ -3,8 +3,6 @@ const router = Router()
  const db = require("../config/db")
 
 
-
-   
 function queryPromise(sql,values=[]){
     return new Promise((resolve,reject)=>{
       db.query(sql,values,(error,result)=>{
@@ -16,6 +14,8 @@ function queryPromise(sql,values=[]){
       })
     });
   }  
+
+
   
 
 router.post('/create', async(request, respond) => {
@@ -35,6 +35,18 @@ router.post('/create', async(request, respond) => {
     }
     
     });//GOLDEN
+
+
+//GETTING ALL PRODUCTS WITH STATUS 1
+
+    router.get("/products", async (req, res) => {
+      const cmd = `select * from Products
+      where pstatus = 1`
+      let [result] = await queryPromise(cmd)
+      res.json(result)
+  }); //YVETTE
+
+
 
 
     router.get('/search', async(request,response)=>{
