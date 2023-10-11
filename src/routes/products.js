@@ -95,4 +95,22 @@ router.post('/create', async(request, respond) => {
     });   //BAUDWIN
 
 
+    router.delete("/delete/:id", async (req, res) => {
+      const id = req.params.id
+      const cmd = `UPDATE products
+      SET pstatus = 0
+      WHERE id = ?`
+      try {
+          await db.query(cmd, id)
+          res.send("Product Deleted Successfully")
+      } catch (error) {
+          res.send(error.message)
+      }
+  
+  }); // DONADONI 
+
+
+
+
+
 module.exports=router
