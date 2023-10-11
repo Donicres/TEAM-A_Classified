@@ -77,7 +77,7 @@ router.post('/create', async(request, respond) => {
         WHERE id = ?`
     
         try {
-            if (!title && !price && !paddress) {
+            if (!title || !price || !paddress) {
                return res.send("INSERT VALUES")
             }
             else{
