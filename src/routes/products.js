@@ -55,4 +55,32 @@ router.post('/create', async(request, respond) => {
   
 
 
+      router.put("/update/:productID", async (req, res) => {
+        const product_id = req.params.productID
+        const { category_id, title, price, paddress, pstatus } = req.body
+        const newUpdate = [title, price, paddress, product_id]
+    
+        const mysqlCommand = `UPDATE products 
+        SET title = ?, price = ?, paddress = ?, updated_on = now()
+        WHERE id = ?`
+    
+        try {
+            if (!title && !price && !paddress) {
+               return res.send("INSERT VALUES")
+            }
+            else{
+    
+                await queryPromise(mysqlCommand, newUpdate)
+                updatedProduct = `SELECT * FROM products WHERE id = ?`
+                let [product] = await queryPromise(updatedProduct, product_id)
+                res.json(product)
+            }
+    
+        }
+        catch (error) {
+            res.send(error.message)
+        }
+    });   //BAUDWIN
+
+
 module.exports=router
